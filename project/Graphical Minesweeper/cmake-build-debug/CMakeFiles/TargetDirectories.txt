@@ -1,0 +1,3 @@
+C:/Users/Acer/Desktop/Graphical Minesweeper/cmake-build-debug/CMakeFiles/Graphical_Minesweeper.dir
+C:/Users/Acer/Desktop/Graphical Minesweeper/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Acer/Desktop/Graphical Minesweeper/cmake-build-debug/CMakeFiles/rebuild_cache.dir
