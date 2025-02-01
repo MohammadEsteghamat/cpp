@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1726666652 source:d:\new folder\t5\main.cpp
+	<iostream>
+	<vector>
+	<cmath>
+	<fstream>
+
+1726708813 source:d:\new folder\t5 - copy\main.cpp
+	<iostream>
+	<vector>
+	<cmath>
+	<fstream>
+	<limits>
+	"pid.h"
+
+1726695313 d:\new folder\t5 - copy\pid.h
+
