@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1724307302 source:d:\new folder\othello\main.cpp
+	<iostream>
+	<windows.h>
+	<vector>
+	<bits/stdc++.h>
+
+1724253882 d:\new folder\othello\othello.h
+	"othello.cpp"
+
+1724253882 d:\new folder\othello\othello.cpp
+	"othello.h"
+
+1724256227 source:d:\new folder\othello\othello.cpp
+

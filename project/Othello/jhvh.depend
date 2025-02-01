@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1726057997 source:d:\new folder\jhvh\main.cpp
+	<iostream>
+	<windows.h>
+	<vector>
+	<algorithm>
+	<string>
+

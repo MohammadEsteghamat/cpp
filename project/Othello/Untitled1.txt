@@ -1,0 +1,43 @@
+void OthelloBoard::findValidMoves(bool color) {
+    availableMovesX.clear();
+    availableMovesY.clear();
+
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            if (board[row][col] == color) {
+                int8_t up = row;
+                int8_t down = 7 - row;
+                int8_t left = col;
+                int8_t right = 7 - col;
+
+                // Directions to check: up, down, right, left, and diagonals
+                vector<pair<int, int>> directions = {
+                    {-1, 0}, {1, 0}, {0, -1}, {0, 1},
+                    {-1, -1}, {-1, 1}, {1, -1}, {1, 1}
+                };
+
+                for (auto& dir : directions) {
+                    int8_t dr = dir.first;
+                    int8_t dc = dir.second;
+                    int8_t r = row + dr;
+                    int8_t c = col + dc;
+                    bool foundOpponent = false;
+
+                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
+                        if (board[r][c] == (color == WHITE ? BLACK : WHITE)) {
+                            foundOpponent = true;
+                        } else if (board[r][c] == NOTHING && foundOpponent) {
+                            availableMovesX.push_back(r);
+                            availableMovesY.push_back(c);
+                            break;
+                        } else {
+                            break;
+                        }
+                        r += dr;
+                        c += dc;
+                    }
+                }
+            }
+        }
+    }
+}
