@@ -1,0 +1,3 @@
+C:/Users/Acer/Desktop/OneBitCounter/cmake-build-debug/CMakeFiles/OneBitCounter_.dir
+C:/Users/Acer/Desktop/OneBitCounter/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Acer/Desktop/OneBitCounter/cmake-build-debug/CMakeFiles/rebuild_cache.dir

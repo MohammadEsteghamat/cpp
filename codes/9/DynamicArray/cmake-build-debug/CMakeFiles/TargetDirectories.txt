@@ -1,0 +1,3 @@
+C:/Users/Acer/Desktop/DynamicArray/cmake-build-debug/CMakeFiles/DynamicArray.dir
+C:/Users/Acer/Desktop/DynamicArray/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Acer/Desktop/DynamicArray/cmake-build-debug/CMakeFiles/rebuild_cache.dir

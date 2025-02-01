@@ -1,0 +1,3 @@
+C:/Users/Acer/Desktop/attractiveness_number/cmake-build-debug/CMakeFiles/attractiveness_number.dir
+C:/Users/Acer/Desktop/attractiveness_number/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Acer/Desktop/attractiveness_number/cmake-build-debug/CMakeFiles/rebuild_cache.dir
