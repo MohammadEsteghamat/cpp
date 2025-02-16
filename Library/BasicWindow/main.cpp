@@ -455,7 +455,7 @@ private:
 };
 
 int main() {
-    Window window("Simple Window", 800, 600, true); // Create a window instance
+    Window window("Simple Window", 800, 600, false); // Create a window instance
     window.Show(SW_SHOW); // Show the window
     window.Run(); // Start the message loop
     return 0;

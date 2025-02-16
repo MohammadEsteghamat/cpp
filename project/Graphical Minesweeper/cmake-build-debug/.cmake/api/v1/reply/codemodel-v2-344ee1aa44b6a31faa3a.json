@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Acer/Desktop/Graphical Minesweeper/cmake-build-debug",
-		"source" : "C:/Users/Acer/Desktop/Graphical Minesweeper"
+		"build" : "C:/Users/Acer/Documents/GitHub/cpp/project/Graphical Minesweeper/cmake-build-debug",
+		"source" : "C:/Users/Acer/Documents/GitHub/cpp/project/Graphical Minesweeper"
 	},
 	"version" : 
 	{
