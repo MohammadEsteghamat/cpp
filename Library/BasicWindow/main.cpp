@@ -1,29 +1,39 @@
 #include <windows.h>
 #include <cmath>
 #include <iostream>
-class EventHandler {
+
+
+
+class Window{
 public:
-    virtual ~EventHandler() = default;                 // Virtual destructor to prevent memory issues
-    virtual void onMouseMove(int x, int y) = 0;        // Handle mouse movement event
-    virtual void onLeftClick() = 0;                    // Handle left mouse button click
-    virtual void onLeftRelease() = 0;                  // Handle left mouse button release
-    virtual void onRightClick() = 0;                   // Handle right mouse button click
-    virtual void onRightRelease() = 0;                 // Handle right mouse button release
-    virtual void onMiddleClick() = 0;                  // Handle middle mouse button click
-    virtual void onMiddleRelease() = 0;                // Handle middle mouse button release
-    virtual void onMouseScroll(int delta) = 0;         // Handle mouse wheel scroll
-    virtual void onKeyPress(wchar_t keyCode) = 0;      // Handle key press event
-    virtual void onKeyRelease(wchar_t keyCode) = 0;    // Handle key release event
-    virtual void onKeyCharInput(wchar_t keyCode) = 0 ; // Handle  character input
-    virtual void onAltKeyPress(wchar_t keyCode) = 0;   // Handle Alt + key press event
-    virtual void onAltRelease(wchar_t charCode) = 0;   // For character input like letters and numbers
-    virtual void onSysCharInput(wchar_t charCode) = 0; // Handle system character input
-};
 
+    struct UserInputState_ {
+        // Mouse state
+        bool leftMousePressed = false;
+        bool rightMousePressed = false;
+        bool middleMousePressed = false; // Track middle mouse button state
+        int mouseX = 0;
+        int mouseY = 0;
+        bool mouseMoved = false; // True when the mouse position changes
+        bool leftMouseReleased = false; // Track left mouse release
+        bool rightMouseReleased = false; // Track right mouse release
+        bool middleMouseReleased = false; // Track middle mouse release
+        int mouseScrollDelta = 0; // Track mouse scroll delta (positive for up, negative for down)
+        // Keyboard state
+        char characterInput = ' ';
+        bool keyShiftPressed = false;
+        bool keyCtrlPressed = false;
+        bool keySpacePressed = false;
+        bool keyEscPressed = false;
+        bool keyEnterPressed = false; // Enter key
+        bool keyTabPressed = false;   // Tab key
+        bool keyBackspacePressed = false; // Backspace key
+        bool keyAltPressed = false;   // Alt key
+        bool keyCapsLockPressed = false; // Caps Lock key
+        int keyFPressed = 0;    // F1 to F12 key
+        bool isKeyReleased = false; // Track if any key was released
+    } userInputState;
 
-
-class Window : public EventHandler{
-public:
     Window(const char* windowTitle, int width, int height, bool resizable) {
         // Getting the instance handle
         hInstance = GetModuleHandle(NULL);
@@ -246,91 +256,102 @@ public:
         ReleaseDC(hwnd, hdc);        // Release the graphics context
     }
 
-    void onMouseMove(int x, int y) override {
-        ClearScreen(RGB(255,255,255));
-        std::string message = "Mouse moved to (" + std::to_string(x) + ", " + std::to_string(y) + ")";
-        Drawtext(10, 10, message.c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onLeftClick() override {
-        ClearScreen(RGB(255,255,255));
-        std::string message = "Left mouse button clicked.";
-        Drawtext(10, 30, message.c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onLeftRelease() override {
-        ClearScreen(RGB(255,255,255));
-        std::string message = "Left mouse button released.";
-        Drawtext(10, 50, message.c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onRightClick() override {
-        ClearScreen(RGB(255,255,255));
-        std::string message = "Right mouse button clicked.";
-        Drawtext(10, 70, message.c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onRightRelease() override {
-        ClearScreen(RGB(255,255,255));
-        std::string message = "Right mouse button released.";
-        Drawtext(10, 90, message.c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onMiddleClick() override {
-        ClearScreen(RGB(255,255,255));
-        std::string message = "Middle mouse button clicked.";
-        Drawtext(10, 110, message.c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onMiddleRelease() override {
-        ClearScreen(RGB(255,255,255));
-        std::string message = "Middle mouse button released.";
-        Drawtext(10, 130, message.c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onMouseScroll(int delta) override {
-        ClearScreen(RGB(255,255,255));
-        std::string message = "Mouse wheel scrolled with delta: " + std::to_string(delta);
-        Drawtext(10, 150, message.c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onKeyPress(wchar_t keyCode) override {
-        ClearScreen(RGB(255,255,255));
-        std::wstring message = L"Key pressed: " + std::wstring(1, keyCode);
-        Drawtext(10, 170, std::string(message.begin(), message.end()).c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onKeyRelease(wchar_t keyCode) override {
-        ClearScreen(RGB(255,255,255));
-        std::wstring message = L"Key released: " + std::wstring(1, keyCode);
-        Drawtext(10, 190, std::string(message.begin(), message.end()).c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onKeyCharInput(wchar_t keyCode) override {
-        ClearScreen(RGB(255,255,255));
-        std::wstring message = L"Character input: " + std::wstring(1, keyCode);
-        Drawtext(10, 210, std::string(message.begin(), message.end()).c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onAltKeyPress(wchar_t keyCode) override {
-        ClearScreen(RGB(255,255,255));
-        std::wstring message = L"Alt key pressed with key: " + std::wstring(1, keyCode);
-        Drawtext(10, 230, std::string(message.begin(), message.end()).c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onAltRelease(wchar_t charCode) override {
-        ClearScreen(RGB(255,255,255));
-        std::wstring message = L"Alt key released with char: " + std::wstring(1, charCode);
-        Drawtext(10, 250, std::string(message.begin(), message.end()).c_str(), RGB(0, 0, 0), 20);
-    }
-
-    void onSysCharInput(wchar_t charCode) override {
-        ClearScreen(RGB(255,255,255));
-        std::wstring message = L"System character input: " + std::wstring(1, charCode);
-        Drawtext(10, 270, std::string(message.begin(), message.end()).c_str(), RGB(0, 0, 0), 20);
-    }
-
 private:
+// Mouse Move
+    void onMouseMove(int x, int y) {
+        userInputState.mouseMoved = true;
+        userInputState.mouseX = x;
+        userInputState.mouseY = y;
+    }
+
+// Left Mouse Click
+    void onLeftClick() {
+        userInputState.leftMousePressed = true;
+        userInputState.leftMouseReleased = false; // Reset release status when clicked
+    }
+
+// Left Mouse Release
+    void onLeftRelease() {
+        userInputState.leftMousePressed = false;
+        userInputState.leftMouseReleased = true; // Mark as released
+    }
+
+// Right Mouse Click
+    void onRightClick() {
+        userInputState.rightMousePressed = true;
+        userInputState.rightMouseReleased = false; // Reset release status when clicked
+    }
+
+// Right Mouse Release
+    void onRightRelease() {
+        userInputState.rightMousePressed = false;
+        userInputState.rightMouseReleased = true; // Mark as released
+    }
+
+// Middle Mouse Click
+    void onMiddleClick() {
+        userInputState.middleMousePressed = true;
+        userInputState.middleMouseReleased = false; // Reset release status when clicked
+
+    }
+
+// Middle Mouse Release
+    void onMiddleRelease() {
+        userInputState.middleMousePressed = false;
+        userInputState.middleMouseReleased = true; // Mark middle mouse as released
+
+    }
+
+// Mouse Scroll
+    void onMouseScroll(int delta) {
+        // Update the mouse scroll delta
+        userInputState.mouseScrollDelta += delta;
+    }
+
+    void onKeyPress(wchar_t keyCode) {
+        userInputState.isKeyReleased = false; // Key is pressed
+        switch (keyCode) {
+            case VK_SHIFT:      userInputState.keyShiftPressed = true; break;
+            case VK_CONTROL:    userInputState.keyCtrlPressed = true; break;
+            case VK_SPACE:      userInputState.keySpacePressed = true; break;
+            case VK_ESCAPE:     userInputState.keyEscPressed = true; break;
+            case VK_RETURN:     userInputState.keyEnterPressed = true; break;
+            case VK_TAB:        userInputState.keyTabPressed = true; break;
+            case VK_BACK:       userInputState.keyBackspacePressed = true; break;
+            case VK_MENU:       userInputState.keyAltPressed = true; break;
+            case VK_CAPITAL:    userInputState.keyCapsLockPressed = true; break;
+            default:
+                if (keyCode >= VK_F1 && keyCode <= VK_F12) {
+                    userInputState.keyFPressed = keyCode - VK_F1 + 1;  // F1 to F12 keys
+                }
+                break;
+        }
+    }
+
+    void onKeyRelease(wchar_t keyCode) {
+        userInputState.isKeyReleased = true; // Key is released
+        switch (keyCode) {
+            case VK_SHIFT:      userInputState.keyShiftPressed = false; break;
+            case VK_CONTROL:    userInputState.keyCtrlPressed = false; break;
+            case VK_SPACE:      userInputState.keySpacePressed = false; break;
+            case VK_ESCAPE:     userInputState.keyEscPressed = false; break;
+            case VK_RETURN:     userInputState.keyEnterPressed = false; break;
+            case VK_TAB:        userInputState.keyTabPressed = false; break;
+            case VK_BACK:       userInputState.keyBackspacePressed = false; break;
+            case VK_MENU:       userInputState.keyAltPressed = false; break;
+            case VK_CAPITAL:    userInputState.keyCapsLockPressed = false; break;
+            default:
+                if (keyCode >= VK_F1 && keyCode <= VK_F12) {
+                    userInputState.keyFPressed = 0;  // Reset F1 to F12 keys
+                }
+                break;
+        }
+    }
+
+    void onKeyCharInput(wchar_t keyCode) {
+        userInputState.characterInput = keyCode; // Save character input
+    }
+
     const char* className = "WindowClass"; // Window class name
     const char* windowTitle;               // Window title
     int width, height;                     // Window dimensions
@@ -425,28 +446,6 @@ private:
                     break;
                 }
 
-                // Handle system key press (e.g., Alt key)
-                case WM_SYSKEYDOWN:
-                {
-                    pThis->onAltKeyPress((wchar_t)wParam);
-                    break;
-                }
-
-                // Handle system key release
-                case WM_SYSKEYUP:
-                {
-                    pThis->onAltRelease((wchar_t)wParam);
-                    break;
-                }
-
-                // Handle system character input
-                case WM_SYSCHAR:
-                {
-                    pThis->onSysCharInput((wchar_t)wParam);
-                    break;
-                }
-
-
             }
         }
 
@@ -455,7 +454,7 @@ private:
 };
 
 int main() {
-    Window window("Simple Window", 800, 600, false); // Create a window instance
+    Window window("mamd", 800, 600, false); // Create a window instance
     window.Show(SW_SHOW); // Show the window
     window.Run(); // Start the message loop
     return 0;
