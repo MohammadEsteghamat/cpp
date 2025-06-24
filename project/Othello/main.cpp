@@ -394,7 +394,7 @@ void OthelloGame::getMove(bool color)
     // Check if the move is in the list of available moves
 
 
-    for (int8_t i = 0; i < availableMovesX.size(); i++) {
+    for (int i = 0; i < availableMovesX.size(); i++) {
         if (availableMovesX[i] == row && availableMovesY[i] == col) {
             validMove = true;
             break;
@@ -535,23 +535,23 @@ void OthelloGame::computerTurn(bool color, int level)
 
 void OthelloGame::chooseBestMove(bool color, int level)
 {
-    vector<int8_t> results(availableMovesX.size());
-    int8_t MAX,indexMAX,MIN,indexMIN,bestMoveIndex;
-    int8_t board_copy[8][8];
+    vector<int> results(availableMovesX.size());
+    int MAX,indexMAX,MIN,indexMIN,bestMoveIndex;
+    int board_copy[8][8];
 
-    for (int8_t row {0}; row < 8; row++)
+    for (int row {0}; row < 8; row++)
     {
-        for (int8_t col {0}; col < 8; col++)
+        for (int col {0}; col < 8; col++)
         {
             board_copy[row][col] = board[row][col];
         }
     }
     // Evaluate each possible move
-    for (int8_t i {0}; i < availableMovesX.size(); i++)
+    for (int i {0}; i < availableMovesX.size(); i++)
     {
-        for (int8_t row{0}; row < 8; row++)
+        for (int row{0}; row < 8; row++)
         {
-            for (int8_t col {0}; col < 8; col++)
+            for (int col {0}; col < 8; col++)
             {
                 board[row][col] = board_copy[row][col];
             }
@@ -579,7 +579,7 @@ void OthelloGame::chooseBestMove(bool color, int level)
     MIN = results.at(0);
     indexMAX = 0;
     indexMIN = 0;
-    for(int8_t i{1};i<results.size();i++)
+    for(int i{1};i<results.size();i++)
     {
         if(results.at(i)> MAX)
         {
